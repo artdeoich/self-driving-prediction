@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+Pillow
+numpy
+matplotlib
+torch
+torchvision
+segmentation_models_pytorch
