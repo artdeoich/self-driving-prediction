@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 from typing import List
 import os
 
-# ---- Modèle ----
+# ---- Model ----
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # Charger le modèle complet
 model = torch.load("unet_model_full.pth", map_location=device, weights_only=False)  # ou "cuda" selon le besoin
