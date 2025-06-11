@@ -1,0 +1,27 @@
+# cloudbuild.yaml
+steps:
+  # Étape 1: Construire l'image Docker
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/votre-fastapi-api:$COMMIT_SHA', '.']
+    # Le '.' à la fin signifie que le Dockerfile est dans le répertoire courant (racine du dépôt)
+
+  # Étape 2: Pousser l'image Docker vers Google Container Registry (GCR)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/votre-fastapi-api:$COMMIT_SHA']
+
+  # Étape 3: Déployer l'image sur Cloud Run
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+      - 'run'
+      - 'deploy'
+      - 'self-driving-prediction-api' # Nom de votre service Cloud Run
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/votre-fastapi-api:$COMMIT_SHA'
+      - '--region'
+      - 'europe-west1' # Mettez la région choisie précédemment
+      - '--allow-unauthenticated' # Permet l'accès public à l'API
+      - '--memory=2Gi' # Augmentez la mémoire si nécessaire
+      - '--cpu=1' # Allouez 1 CPU
+    env:
+      - 'PROJECT_ID=$PROJECT_ID' # Passe l'ID du projet en variable d'environnement
