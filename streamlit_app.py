@@ -4,7 +4,7 @@ from PIL import Image
 import io
 
 # Endpoints de l’API
-API_URL = "http://127.0.0.1:8000"
+API_URL = "https://self-driving-prediction-283057982875.europe-west1.run.app"
 PREDICT_ENDPOINT = f"{API_URL}/predict/"
 IMAGE_LIST_ENDPOINT = f"{API_URL}/image_ids/"
 REAL_IMAGE_ENDPOINT = f"{API_URL}/image/"
