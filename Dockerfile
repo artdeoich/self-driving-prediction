@@ -14,4 +14,5 @@ COPY main.py .
 ENV PORT 8080
 EXPOSE $PORT
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "$PORT"]
+# Utilise un shell pour s'assurer que la variable $PORT est correctement substituée
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port $PORT"]

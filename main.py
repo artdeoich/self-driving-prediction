@@ -88,3 +88,12 @@ async def predict(file: UploadFile = File(...)):
     buffer.seek(0)
 
     return StreamingResponse(buffer, media_type="image/png")
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+if __name__ == "__main__":
+    # Récupère la variable d'environnement PORT, sinon utilise 8000 (pour les tests locaux)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
