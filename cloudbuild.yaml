@@ -14,7 +14,7 @@ steps:
     args:
       - 'run'
       - 'deploy'
-      - 'votre-fastapi-api' # Nom de votre service Cloud Run
+      - 'self-driving-prediction-api' # Nom de votre service Cloud Run
       - '--image'
       - 'gcr.io/$PROJECT_ID/votre-fastapi-api:$COMMIT_SHA'
       - '--region'
