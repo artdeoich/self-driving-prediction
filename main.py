@@ -29,6 +29,10 @@ image_transform = transforms.Compose([
 # ---- API ----
 app = FastAPI()
 
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
 # Chemin vers le dossier contenant les images test
 IMAGE_DIR = "P8_Cityscapes_leftImg8bit_trainvaltest/leftImg8bit/val/frankfurt"
 MASK_DIR = "P8_Cityscapes_gtFine_trainvaltest/gtFine/val/frankfurt"
@@ -88,10 +92,6 @@ async def predict(file: UploadFile = File(...)):
     buffer.seek(0)
 
     return StreamingResponse(buffer, media_type="image/png")
-
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
 
 if __name__ == "__main__":
     # Récupère la variable d'environnement PORT, sinon utilise 8000 (pour les tests locaux)
