@@ -6,7 +6,7 @@ steps:
 
   # Étape 2: Pousser l'image Docker vers Google Container Registry (GCR)
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/votre-fastapi-api:$COMMIT_SHA']
+    args: ['push', 'gcr.io/$PROJECT_ID/self-driving-prediction-api:$COMMIT_SHA']
 
   # Étape 3: Déployer l'image sur Cloud Run
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
