@@ -2,7 +2,7 @@
 steps:
   # Étape 1: Construire l'image Docker
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/votre-fastapi-api:$COMMIT_SHA', '.']
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/self-driving-prediction-api:$COMMIT_SHA', '.']
 
   # Étape 2: Pousser l'image Docker vers Google Container Registry (GCR)
   - name: 'gcr.io/cloud-builders/docker'
@@ -16,7 +16,7 @@ steps:
       - 'deploy'
       - 'self-driving-prediction-api' # Nom de votre service Cloud Run
       - '--image'
-      - 'gcr.io/$PROJECT_ID/votre-fastapi-api:$COMMIT_SHA'
+      - 'gcr.io/$PROJECT_ID/self-driving-prediction-api:$COMMIT_SHA'
       - '--region'
       - 'europe-west1' # Mettez la région choisie précédemment
       - '--allow-unauthenticated'
