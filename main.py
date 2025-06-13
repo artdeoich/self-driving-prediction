@@ -15,7 +15,6 @@ import requests
 import gdown
 
 # ---- Model ----
-
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # Charger le modèle complet
 import gdown
