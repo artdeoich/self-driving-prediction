@@ -14,6 +14,7 @@ import os
 import requests
 
 # ---- Model ----
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # Charger le modèle complet
 def download_from_google_drive(file_id, destination):
