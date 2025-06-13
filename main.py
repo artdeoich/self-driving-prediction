@@ -11,11 +11,50 @@ import numpy as np
 import matplotlib.pyplot as plt
 from typing import List
 import os
+import requests
 
 # ---- Model ----
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 # Charger le modèle complet
-model = torch.load("unet_model_full.pth", map_location=device, weights_only=False)  # ou "cuda" selon le besoin
+https://drive.google.com/file/d/13DAtpmVMSKJxpCDODbuxOQNtMwgF3SSE/view?usp=sharing
+
+
+def download_from_google_drive(file_id, destination):
+    URL = "https://docs.google.com/uc?export=download"
+
+    session = requests.Session()
+    response = session.get(URL, params={'id': file_id}, stream=True)
+
+    def get_confirm_token(response):
+        for key, value in response.cookies.items():
+            if key.startswith('download_warning'):
+                return value
+        return None
+
+    token = get_confirm_token(response)
+
+    if token:
+        params = {'id': file_id, 'confirm': token}
+        response = session.get(URL, params=params, stream=True)
+
+    with open(destination, "wb") as f:
+        for chunk in response.iter_content(32768):
+            if chunk:
+                f.write(chunk)
+
+    print(f"Downloaded to {destination}")
+
+# === CONFIGURATION ===
+file_id = "13DAtpmVMSKJxpCDODbuxOQNtMwgF3SSE"  # Remplace par ton vrai ID
+destination = "unet_model_full.pth"
+
+# === TÉLÉCHARGEMENT ===
+if not os.path.exists(destination):
+    download_from_google_drive(file_id, destination)
+
+# === CHARGEMENT DU MODÈLE ===
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+model = torch.load(destination, map_location=device)
 model.eval()
 
 # ---- Transforms ----
