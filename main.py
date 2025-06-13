@@ -52,7 +52,7 @@ if not os.path.exists(destination):
 
 # === CHARGEMENT DU MODÈLE ===
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-model = torch.load(destination, map_location=device)
+model = torch.load(destination, map_location=device, weights_only=False)  # ou "cuda" selon le besoin
 model.eval()
 
 # ---- Transforms ----
