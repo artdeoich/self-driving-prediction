@@ -29,8 +29,10 @@ url = f"https://drive.google.com/uc?id={file_id}"
 # Télécharge si nécessaire
 if not os.path.exists(destination):
     gdown.download(url, destination, quiet=False)
+    if os.path.getsize(destination) < 1_000_000:  # Moins de 1 Mo → probablement mauvais fichier
+        raise RuntimeError("Fichier téléchargé invalide ou trop petit. Vérifiez le lien Google Drive.")
 
-
+    
 # === CHARGEMENT DU MODÈLE ===
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model = torch.load(destination, map_location=device, weights_only=False)  # ou "cuda" selon le besoin
