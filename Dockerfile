@@ -5,7 +5,6 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copie le modèle et les données depuis le dépôt GitHub
-COPY unet_model_full.pth .
 COPY P8_Cityscapes_leftImg8bit_trainvaltest/ P8_Cityscapes_leftImg8bit_trainvaltest/
 COPY P8_Cityscapes_gtFine_trainvaltest/ P8_Cityscapes_gtFine_trainvaltest/
 
