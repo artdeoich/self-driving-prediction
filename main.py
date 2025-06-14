@@ -32,6 +32,10 @@ if not os.path.exists(destination):
     if os.path.getsize(destination) < 1_000_000:  # Moins de 1 Mo → probablement mauvais fichier
         raise RuntimeError("Fichier téléchargé invalide ou trop petit. Vérifiez le lien Google Drive.")
 
+with open(destination, "rb") as f:
+    start = f.read(200)
+    print("=== DEBUT DU FICHIER ===")
+    print(start)
     
 # === CHARGEMENT DU MODÈLE ===
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
