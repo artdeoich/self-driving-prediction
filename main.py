@@ -20,7 +20,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 import gdown
 import os
 
-file_id = "13DAtpmVMSKJxpCDODbuxOQNtMwgF3SSE"  # remplace par ton ID
+file_id = "10QUXjMYPWP8KNAhBGqHtInDpIPq2yIa3"  # remplace par ton ID
 destination = "unet_model_full.pth"
 
 # Crée une vraie URL de téléchargement
